@@ -35,7 +35,7 @@ public class Board {
                 } else if (line == 0){
                     this.boardMatrix[line][column] = String.valueOf(column);
                 } else {
-                    this.boardMatrix[line][column] = "0";
+                    this.boardMatrix[line][column] = ".";
                 }
             }
         }
