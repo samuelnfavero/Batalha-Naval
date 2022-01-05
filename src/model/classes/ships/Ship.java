@@ -71,21 +71,27 @@ public class Ship {
     }
 
     public void setArrayWithShipAllPositions() {
+
         final int ARRAY_POSITION_FOR_LINE = 0;
         final int ARRAY_POSITION_FOR_COLUMN = 1;
-        if (this.initialLine == this.finalLine) {
-            int columnPosition = this.initialColumn < this.finalColumn ? this.initialColumn : this.finalColumn;
-            for (int i = 0; i < this.shipLength; i++) {
-                this.shipAllPositions[i][ARRAY_POSITION_FOR_LINE] = this.initialLine;
-                this.shipAllPositions[i][ARRAY_POSITION_FOR_COLUMN] = columnPosition;
-                columnPosition++;
-            }
-        } else {
-            int linePosition = this.initialLine < this.finalLine ? this.initialLine : this.finalLine;
-            for (int i = 0; i < this.shipLength; i++) {
-                this.shipAllPositions[i][ARRAY_POSITION_FOR_LINE] = linePosition;
-                this.shipAllPositions[i][ARRAY_POSITION_FOR_COLUMN] = this.initialColumn;
-                linePosition++;
+        if(this.shipLength == 1){
+            this.shipAllPositions[0][ARRAY_POSITION_FOR_LINE] = this.initialLine;
+            this.shipAllPositions[0][ARRAY_POSITION_FOR_COLUMN] = this.initialColumn;
+        }else {
+            if (this.initialLine == this.finalLine) {
+                int columnPosition = this.initialColumn < this.finalColumn ? this.initialColumn : this.finalColumn;
+                for (int i = 0; i < this.shipLength; i++) {
+                    this.shipAllPositions[i][ARRAY_POSITION_FOR_LINE] = this.initialLine;
+                    this.shipAllPositions[i][ARRAY_POSITION_FOR_COLUMN] = columnPosition;
+                    columnPosition++;
+                }
+            } else {
+                int linePosition = this.initialLine < this.finalLine ? this.initialLine : this.finalLine;
+                for (int i = 0; i < this.shipLength; i++) {
+                    this.shipAllPositions[i][ARRAY_POSITION_FOR_LINE] = linePosition;
+                    this.shipAllPositions[i][ARRAY_POSITION_FOR_COLUMN] = this.initialColumn;
+                    linePosition++;
+                }
             }
         }
     }
