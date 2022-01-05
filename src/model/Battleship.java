@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Battleship {
     public static void main(String[] args){
 
-        Board board = new Board(10, 10);
+        Board board = new Board(11, 11);
         board.boardGenerator();
         board.showBoard();
         Ship ship = new Ship("Navio", 1);
