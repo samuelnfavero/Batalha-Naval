@@ -61,12 +61,22 @@ public class Ship {
     public void changeInitialLine(){
         System.out.println("Insira a linha da posição inicial deste navio: ");
         int initialLine = Input.inputInt();
+        while(initialLine < 1 || initialLine > 10) {
+            System.out.println("Essa posição não existe no tabuleiro");
+            System.out.println("Insira a linha da posição inicial deste navio: ");
+            initialLine = Input.inputInt();
+        }
         this.setInitialLine(initialLine);
     }
 
     public void changeInitialColumn(){
         System.out.println("Insira a coluna da posição inicial deste navio: ");
         int initialColumn = Input.inputInt();
+        while(initialColumn < 1 || initialColumn > 10) {
+            System.out.println("Essa posição não existe no tabuleiro");
+            System.out.println("Insira a coluna da posição inicial deste navio: ");
+            initialColumn = Input.inputInt();
+        }
         this.setInitialColumn(initialColumn);
     }
 

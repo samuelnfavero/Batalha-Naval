@@ -30,7 +30,13 @@ public class Board {
     public void boardGenerator(){ //aqui não rola com função statica não sei pq, tem q ver dps
         for(int line = 0; line < this.NUMBER_OF_LINES; line++){
             for(int column = 0; column < this.NUMBER_OF_COLUMNS; column++){
-                this.boardMatrix[line][column] = "0";
+                if (column == 0) {
+                    this.boardMatrix[line][column] = String.valueOf(line);
+                } else if (line == 0){
+                    this.boardMatrix[line][column] = String.valueOf(column);
+                } else {
+                    this.boardMatrix[line][column] = "0";
+                }
             }
         }
     }
