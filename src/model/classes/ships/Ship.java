@@ -59,7 +59,7 @@ public class Ship {
     //-------Methods-------//
 
     public void changeInitialLine(){
-        System.out.println("Insira a linha da posição inicial deste navio: ");
+        System.out.println("Insira a linha da posição inicial do " + this.shipName + " de comprimento " + this.shipLength + ": ");
         int initialLine = Input.inputInt();
         while(initialLine < 1 || initialLine > 10) {
             System.out.println("Essa posição não existe no tabuleiro");
@@ -70,7 +70,7 @@ public class Ship {
     }
 
     public void changeInitialColumn(){
-        System.out.println("Insira a coluna da posição inicial deste navio: ");
+        System.out.println("Insira a coluna da posição inicial do " + this.shipName + " de comprimento " + this.shipLength + ": ");
         int initialColumn = Input.inputInt();
         while(initialColumn < 1 || initialColumn > 10) {
             System.out.println("Essa posição não existe no tabuleiro");
