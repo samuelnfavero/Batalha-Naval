@@ -32,23 +32,24 @@ public class Battleship {
                     ship[i].setFinalLine(option[ARRAY_POSITION_FOR_LINE]);
                     ship[i].setFinalColumn(option[ARRAY_POSITION_FOR_COLUMN]);
                 }
+
                 ship[i].setArrayWithShipAllPositions();
-
-                int[][] shipAllPositions = ship[i].getShipAllPositions();
-                for (int[] position : shipAllPositions) {
-                    if (board.getBoardMatrix()[position[ARRAY_POSITION_FOR_LINE]][position[ARRAY_POSITION_FOR_COLUMN]] == ".") {
-                        isEmpty = true;
-                    } else {
-                        isEmpty = false;
-                        System.out.println("Uma das posições já está ocupada. Insira as posições deste navio novamente.");
-                        break;
-                    }
-                }
-
+                isEmpty = verifyIfThePositionIsEmpty(ship[i].getShipAllPositions(), board.getBoardMatrix());
             }
             board.putShipOnTheBoard(ship[i].getShipAllPositions(), board.getBoardMatrix());
             board.showBoard();
         }
     }
 
+    public static boolean verifyIfThePositionIsEmpty(int[][] shipAllPositions, String[][] boardMatrix){
+        final int ARRAY_POSITION_FOR_LINE = 0;
+        final int ARRAY_POSITION_FOR_COLUMN = 1;
+        for (int[] position : shipAllPositions) {
+            if (boardMatrix[position[ARRAY_POSITION_FOR_LINE]][position[ARRAY_POSITION_FOR_COLUMN]] != ".") {
+                System.out.println("Uma das posições já está ocupada. Insira as posições deste navio novamente.");
+                return false;
+            }
+        }
+        return true;
+    }
 }
