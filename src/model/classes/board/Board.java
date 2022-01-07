@@ -26,6 +26,10 @@ public class Board {
         return playerBoard;
     }
 
+    public String[][] getComputerBoard() {
+        return computerBoard;
+    }
+
 
     public void boardGenerator(){ //aqui não rola com função statica não sei pq, tem q ver dps
         for(int line = 0; line < this.NUMBER_OF_LINES; line++){
@@ -99,8 +103,8 @@ public class Board {
     public static int[] chooseOptionForComputer(ArrayList<int[]> options){
         int option;
         do{
-            option = RandomNumberGenerator.randomIntGenerator(4);
-        }while(option > options.size());
+            option = RandomNumberGenerator.randomIntGenerator(4) - 1;
+        }while(option >= options.size());
         return options.get(option);
     }
 
