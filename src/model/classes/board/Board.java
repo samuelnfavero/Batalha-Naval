@@ -9,42 +9,52 @@ public class Board {
     Scanner input = new Scanner(System.in);
     private int NUMBER_OF_LINES;
     private int NUMBER_OF_COLUMNS;
-    private String [][] boardMatrix;
+    private String [][] playerBoard;
+    private String[][] computerBoard;
     public final int ARRAY_POSITION_FOR_LINE = 0;
     public final int ARRAY_POSITION_FOR_COLUMN = 1;
 
     public Board(int numberOfLines, int numberOfColumns){
         this.NUMBER_OF_LINES = numberOfLines;
         this.NUMBER_OF_COLUMNS = numberOfColumns;
-        this.boardMatrix = new String[this.NUMBER_OF_LINES][this.NUMBER_OF_COLUMNS];
+        this.playerBoard = new String[this.NUMBER_OF_LINES][this.NUMBER_OF_COLUMNS];
+        this.computerBoard = new String[this.NUMBER_OF_LINES][this.NUMBER_OF_COLUMNS];
     }
 
-    public String[][] getBoardMatrix() {
-        return boardMatrix;
+    public String[][] getPlayerBoard() {
+        return playerBoard;
     }
 
-    public void setBoardMatrix(String[][] boardMatrix) {
-        this.boardMatrix = boardMatrix;
-    }
 
     public void boardGenerator(){ //aqui não rola com função statica não sei pq, tem q ver dps
         for(int line = 0; line < this.NUMBER_OF_LINES; line++){
             for(int column = 0; column < this.NUMBER_OF_COLUMNS; column++){
                 if (column == 0) {
-                    this.boardMatrix[line][column] = String.valueOf(line);
+                    this.playerBoard[line][column] = String.valueOf(line);
+                    this.computerBoard[line][column] = String.valueOf(line);
                 } else if (line == 0){
-                    this.boardMatrix[line][column] = String.valueOf(column);
+                    this.playerBoard[line][column] = String.valueOf(column);
+                    this.computerBoard[line][column] = String.valueOf(column);
                 } else {
-                    this.boardMatrix[line][column] = ".";
+                    this.playerBoard[line][column] = ".";
+                    this.computerBoard[line][column] = ".";
                 }
             }
         }
     }
     public void showBoard(){
+        System.out.println("Tabuleiro do computador");
+        for(int line = 0; line < computerBoard.length; line++){
+            for(int column = 0; column < computerBoard[line].length; column++){
+                System.out.print("|" + computerBoard[line][column]);
+            }
+            System.out.println("|");
 
-        for(int line = 0; line < boardMatrix.length; line++){
-            for(int column = 0; column < boardMatrix[line].length; column++){
-                System.out.print("|" + boardMatrix[line][column]);
+        }
+        System.out.println("Seu tabuleiro");
+        for(int line = 0; line < playerBoard.length; line++){
+            for(int column = 0; column < playerBoard[line].length; column++){
+                System.out.print("|" + playerBoard[line][column]);
             }
             System.out.println("|");
 
@@ -52,11 +62,11 @@ public class Board {
 
     }
 
-    public ArrayList<int[]> showOptionsForShipFinalPosition(int initialLine, int initialColumn, int shipLength){
+    public ArrayList<int[]> setOptionsForShipFinalPosition(int initialLine, int initialColumn, int shipLength){
         int[] option1 = (initialLine - (shipLength - 1)) >= 0 ? new int[] {(initialLine - (shipLength - 1)), initialColumn} : new int[]{0};
-        int[] option2 = (initialLine + (shipLength-1)) < this.boardMatrix.length ? new int[] {(initialLine + (shipLength-1)), initialColumn} : new int[] {0};
+        int[] option2 = (initialLine + (shipLength-1)) < this.playerBoard.length ? new int[] {(initialLine + (shipLength-1)), initialColumn} : new int[] {0};
         int[] option3 = (initialColumn - (shipLength - 1)) >= 0? new int[] {initialLine, (initialColumn - (shipLength - 1))} : new int[] {0};
-        int[] option4 = (initialColumn + (shipLength - 1)) < this.boardMatrix.length ? new int[] {initialLine, (initialColumn + (shipLength - 1))} : new int[] {0};
+        int[] option4 = (initialColumn + (shipLength - 1)) < this.playerBoard.length ? new int[] {initialLine, (initialColumn + (shipLength - 1))} : new int[] {0};
         int[][] optionsArray = {option1, option2, option3, option4};
         ArrayList<int[]> options = new ArrayList<int[]>();
 

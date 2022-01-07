@@ -3,9 +3,6 @@ package model;
 import model.classes.board.Board;
 import model.classes.ships.Ship;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 
 import java.util.ArrayList;
 
@@ -26,7 +23,7 @@ public class Battleship {
                 ship[i].changeInitialColumn();
                 if (ship[i].getShipLength() > 1) {
                     ;
-                    ArrayList options = board.showOptionsForShipFinalPosition(ship[i].getInitialLine(), ship[i].getInitialColumn(), ship[i].getShipLength());
+                    ArrayList options = board.setOptionsForShipFinalPosition(ship[i].getInitialLine(), ship[i].getInitialColumn(), ship[i].getShipLength());
                     board.printOptionsOnConsole(options);
                     int[] option = board.chooseOption(options);
                     ship[i].setFinalLine(option[ARRAY_POSITION_FOR_LINE]);
@@ -34,9 +31,9 @@ public class Battleship {
                 }
 
                 ship[i].setArrayWithShipAllPositions();
-                isEmpty = verifyIfThePositionIsEmpty(ship[i].getShipAllPositions(), board.getBoardMatrix());
+                isEmpty = verifyIfThePositionIsEmpty(ship[i].getShipAllPositions(), board.getPlayerBoard());
             }
-            board.putShipOnTheBoard(ship[i].getShipAllPositions(), board.getBoardMatrix());
+            board.putShipOnTheBoard(ship[i].getShipAllPositions(), board.getPlayerBoard());
             board.showBoard();
         }
     }
