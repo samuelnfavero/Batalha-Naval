@@ -1,6 +1,7 @@
 package model.classes.board;
 
 import model.classes.utils.Input;
+import model.classes.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -85,13 +86,21 @@ public class Board {
         }
 
 
-    public static int[] chooseOption(ArrayList<int[]> options){
-        System.out.println("Digite a opção escolhida:");
+    public static int[] chooseOptionForPlayer(ArrayList<int[]> options){
+        System.out.println("Digite a opção escolhida:" + options.size());
         int option = (Input.inputInt() - 1);
         while(option >= options.size()){
             System.out.println("Opção Inválida. Digite a opção escolhida:");
             option = (Input.inputInt() - 1);
         }
+        return options.get(option);
+    }
+
+    public static int[] chooseOptionForComputer(ArrayList<int[]> options){
+        int option;
+        do{
+            option = RandomNumberGenerator.randomIntGenerator(4);
+        }while(option > options.size());
         return options.get(option);
     }
 

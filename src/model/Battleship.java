@@ -11,6 +11,7 @@ public class Battleship {
         final int ARRAY_POSITION_FOR_LINE = 0;
         final int ARRAY_POSITION_FOR_COLUMN = 1;
 
+
         Board board = new Board(11, 11);
         board.boardGenerator();
         board.showBoard();
@@ -22,10 +23,9 @@ public class Battleship {
                 ship[i].changeInitialLine();
                 ship[i].changeInitialColumn();
                 if (ship[i].getShipLength() > 1) {
-                    ;
                     ArrayList options = board.setOptionsForShipFinalPosition(ship[i].getInitialLine(), ship[i].getInitialColumn(), ship[i].getShipLength());
                     board.printOptionsOnConsole(options);
-                    int[] option = board.chooseOption(options);
+                    int[] option = board.chooseOptionForPlayer(options);
                     ship[i].setFinalLine(option[ARRAY_POSITION_FOR_LINE]);
                     ship[i].setFinalColumn(option[ARRAY_POSITION_FOR_COLUMN]);
                 }
