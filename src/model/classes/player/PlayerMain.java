@@ -1,5 +1,78 @@
 package model.classes.player;
 
-public class PlayerMain {
+import model.classes.utils.Input;
+import model.classes.utils.RandomNumberGenerator;
 
+import java.util.Arrays;
+
+import static java.util.Arrays.stream;
+
+public class PlayerMain {
+    private int playersShotsOnTarget;
+    private int computersShotsOnTarget;
+    private int shotsToBeHit;
+
+    public PlayerMain(){
+        this.playersShotsOnTarget = 0;
+        this.computersShotsOnTarget = 0;
+        this.shotsToBeHit = 16;
+
+    }
+
+    public int getPlayersShotsOnTarget() {
+        return playersShotsOnTarget;
+    }
+
+    public int getComputersShotsOnTarget() {
+        return computersShotsOnTarget;
+    }
+
+    public  int getShotsToBeHit() {
+        return shotsToBeHit;
+    }
+
+    //    public static int setShotsToBeHit(String[] board){
+//
+//    }
+
+    public boolean giveAShot(String[][] board, String typeOfPlayer){
+        final int BOARD_FIRST_POSITION = 1;
+        final int BOARD_LAST_POSITION = 10;
+        int line = 0;
+        int column = 0;
+        boolean isTheShotRight = true;
+        if(typeOfPlayer == "Player") {
+            do {
+                System.out.println("Digite a linha da posição para dar o tiro: ");
+                line = Input.inputInt();
+            }while(line < BOARD_FIRST_POSITION || line > BOARD_LAST_POSITION);
+            do{
+                System.out.println("Digite a coluna da posição para dar o tiro: ");
+                column = Input.inputInt();
+            }while(column < BOARD_FIRST_POSITION  || column > BOARD_LAST_POSITION);
+            isTheShotRight = setShotOnTheBoard(board, line, column);
+            this.playersShotsOnTarget += 1;
+        }
+        if(typeOfPlayer == "Computer") {
+            line = RandomNumberGenerator.randomIntGenerator(BOARD_LAST_POSITION);
+            column = RandomNumberGenerator.randomIntGenerator(BOARD_LAST_POSITION);
+            isTheShotRight = setShotOnTheBoard(board, line, column);
+            this.computersShotsOnTarget += 1;
+        }
+        return isTheShotRight;
+    }
+
+    private static boolean setShotOnTheBoard(String[][] board, int line, int column){
+        String boardElement = board[line][column];
+        boolean isTheShotRight = true;
+        if(boardElement == "S"){
+            board[line][column] = "X";
+            isTheShotRight = true;
+        }
+        if(boardElement == "."){
+            board[line][column] = "-";
+            isTheShotRight = false;
+        }
+        return  isTheShotRight;
+    }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import model.classes.board.Board;
+import model.classes.player.PlayerMain;
 import model.classes.ships.Ship;
 import model.classes.utils.RandomNumberGenerator;
 
@@ -56,7 +57,28 @@ public class Battleship {
             board.putShipOnTheBoard(playerShips[i].getShipAllPositions(), board.getPlayerBoard());
             board.showBoard();
         }
+
+        PlayerMain players = new PlayerMain();
+
+        System.out.println("Começando os ataques ...");
+
+        boolean isTheShotRight;
+        do{
+            do{
+                isTheShotRight = players.giveAShot(board.getComputerBoard(), "Player");
+                board.showBoard();
+            }while(isTheShotRight);
+            do{
+                isTheShotRight = players.giveAShot(board.getPlayerBoard(), "Computer");
+                board.showBoard();
+            }while(isTheShotRight);
+        }while(players.getPlayersShotsOnTarget() < players.getShotsToBeHit() || players.getComputersShotsOnTarget() < players.getShotsToBeHit());
+
+        System.out.println("Jogo encerrado!");
+        String winner = players.getPlayersShotsOnTarget() == players.getShotsToBeHit() ? "Você venceu!": "Você perdeu!";
+        System.out.println(winner);
     }
+
 
     public static boolean verifyIfThePositionIsEmpty(int[][] shipAllPositions, String[][] boardMatrix, String typeOfPlayer){
         final int ARRAY_POSITION_FOR_LINE = 0;
