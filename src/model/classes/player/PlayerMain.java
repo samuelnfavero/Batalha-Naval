@@ -73,6 +73,9 @@ public class PlayerMain {
             board[line][column] = "-";
             isTheShotRight = false;
         }
+        if(boardElement == "X"){
+            isTheShotRight = false;
+        }
         return  isTheShotRight;
     }
 }

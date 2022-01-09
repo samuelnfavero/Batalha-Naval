@@ -63,20 +63,23 @@ public class Battleship {
         System.out.println("Começando os ataques ...");
 
         boolean isTheShotRight;
-        do{
+        while((players.getPlayersShotsOnTarget() < players.getShotsToBeHit()) && (players.getComputersShotsOnTarget() < players.getShotsToBeHit())) {
             do{
                 isTheShotRight = players.giveAShot(board.getComputerBoard(), "Player");
                 System.out.println("Player" + players.getPlayersShotsOnTarget());
                 board.showBoard();
-            }while(isTheShotRight);
+                System.out.println("acertos do player = " + players.getPlayersShotsOnTarget());
+                System.out.println("navios disponiveis = " + players.getShotsToBeHit());
+
+            }while(isTheShotRight && players.getPlayersShotsOnTarget() < players.getShotsToBeHit());
             do{
                 isTheShotRight = players.giveAShot(board.getPlayerBoard(), "Computer");
                 System.out.println("Computador" + players.getComputersShotsOnTarget());
                 board.showBoard();
-            }while(isTheShotRight);
-        }while((players.getPlayersShotsOnTarget() < players.getShotsToBeHit()) || (players.getComputersShotsOnTarget() < players.getShotsToBeHit()));
+            }while(isTheShotRight && (players.getComputersShotsOnTarget() < players.getShotsToBeHit()));
+        }
 
-        System.out.println("Jogo encerrado!"); //JOGO NÃO TÁ FINALIZANDO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        System.out.println("Jogo encerrado!");
         String winner = players.getPlayersShotsOnTarget() == players.getShotsToBeHit() ? "Você venceu!": "Você perdeu!";
         System.out.println(winner);
     }
