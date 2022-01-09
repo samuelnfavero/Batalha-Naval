@@ -66,15 +66,17 @@ public class Battleship {
         do{
             do{
                 isTheShotRight = players.giveAShot(board.getComputerBoard(), "Player");
+                System.out.println("Player" + players.getPlayersShotsOnTarget());
                 board.showBoard();
             }while(isTheShotRight);
             do{
                 isTheShotRight = players.giveAShot(board.getPlayerBoard(), "Computer");
+                System.out.println("Computador" + players.getComputersShotsOnTarget());
                 board.showBoard();
             }while(isTheShotRight);
-        }while(players.getPlayersShotsOnTarget() < players.getShotsToBeHit() || players.getComputersShotsOnTarget() < players.getShotsToBeHit());
+        }while((players.getPlayersShotsOnTarget() < players.getShotsToBeHit()) || (players.getComputersShotsOnTarget() < players.getShotsToBeHit()));
 
-        System.out.println("Jogo encerrado!");
+        System.out.println("Jogo encerrado!"); //JOGO NÃO TÁ FINALIZANDO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         String winner = players.getPlayersShotsOnTarget() == players.getShotsToBeHit() ? "Você venceu!": "Você perdeu!";
         System.out.println(winner);
     }

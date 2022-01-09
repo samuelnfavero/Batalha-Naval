@@ -51,13 +51,13 @@ public class PlayerMain {
                 column = Input.inputInt();
             }while(column < BOARD_FIRST_POSITION  || column > BOARD_LAST_POSITION);
             isTheShotRight = setShotOnTheBoard(board, line, column);
-            this.playersShotsOnTarget += 1;
+            this.playersShotsOnTarget = isTheShotRight ? this.playersShotsOnTarget + 1 : this.playersShotsOnTarget;
         }
         if(typeOfPlayer == "Computer") {
             line = RandomNumberGenerator.randomIntGenerator(BOARD_LAST_POSITION);
             column = RandomNumberGenerator.randomIntGenerator(BOARD_LAST_POSITION);
             isTheShotRight = setShotOnTheBoard(board, line, column);
-            this.computersShotsOnTarget += 1;
+            this.computersShotsOnTarget = isTheShotRight ? this.computersShotsOnTarget + 1 : this.computersShotsOnTarget;
         }
         return isTheShotRight;
     }
