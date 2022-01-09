@@ -48,14 +48,6 @@ public class Board {
         }
     }
     public void showBoard(){
-        System.out.println("Tabuleiro do computador");
-        for(int line = 0; line < computerBoard.length; line++){
-            for(int column = 0; column < computerBoard[line].length; column++){
-                System.out.print("|" + computerBoard[line][column]);
-            }
-            System.out.println("|");
-
-        }
         System.out.println("Seu tabuleiro");
         for(int line = 0; line < playerBoard.length; line++){
             for(int column = 0; column < playerBoard[line].length; column++){
@@ -65,6 +57,20 @@ public class Board {
 
         }
 
+        System.out.println("Tabuleiro do computador");
+        for(int line = 0; line < computerBoard.length; line++){
+            for(int column = 0; column < computerBoard[line].length; column++){
+                String showItem;
+                if(computerBoard[line][column] == "S") {
+                    showItem = ".";
+                } else {
+                    showItem = computerBoard[line][column];
+                }
+                System.out.print("|" + showItem);
+            }
+            System.out.println("|");
+
+        }
     }
 
     public ArrayList<int[]> setOptionsForShipFinalPosition(int initialLine, int initialColumn, int shipLength){
