@@ -10,5 +10,9 @@ public class Input {
          return inputInt.nextInt();
     }
 
+    public static char inputChar(){
+        Scanner inputChar = new Scanner(System.in);
+        return inputChar.next().charAt(0);
+    }
 
 }

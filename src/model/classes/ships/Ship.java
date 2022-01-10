@@ -1,5 +1,6 @@
 package model.classes.ships;
 
+import model.classes.utils.ColumnLettersGenerator;
 import model.classes.utils.Input;
 
 public class Ship {
@@ -59,8 +60,8 @@ public class Ship {
     //-------Methods-------//
 
     public void changeInitialLine(){
-        System.out.println("Insira a linha da posição inicial do " + this.shipName + " de comprimento " + this.shipLength + ": ");
-        int initialLine = Input.inputInt();
+        System.out.println("Insira a linha da posição inicial do " + this.shipName + " de comprimento " + this.shipLength + " (LETRA) " + ": ");
+        int initialLine = ColumnLettersGenerator.transformLetterInNumber(Input.inputChar());
         while(initialLine < 1 || initialLine > 10) {
             System.out.println("Essa posição não existe no tabuleiro");
             System.out.println("Insira a linha da posição inicial deste navio: ");
@@ -70,7 +71,7 @@ public class Ship {
     }
 
     public void changeInitialColumn(){
-        System.out.println("Insira a coluna da posição inicial do " + this.shipName + " de comprimento " + this.shipLength + ": ");
+        System.out.println("Insira a coluna da posição inicial do " + this.shipName + " de comprimento " + this.shipLength + " (NÚMERO)" + ": ");
         int initialColumn = Input.inputInt();
         while(initialColumn < 1 || initialColumn > 10) {
             System.out.println("Essa posição não existe no tabuleiro");

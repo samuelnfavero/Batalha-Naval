@@ -68,8 +68,11 @@ public class Battleship {
                 isTheShotRight = players.giveAShot(board.getComputerBoard(), "Player");
                 System.out.println("Player" + players.getPlayersShotsOnTarget());
                 board.showBoard();
-                System.out.println("acertos do player = " + players.getPlayersShotsOnTarget());
-                System.out.println("navios disponiveis = " + players.getShotsToBeHit());
+                if(isTheShotRight) {
+                    System.out.println("Você acertou o último tiro!!! =D");
+                } else {
+                    System.out.println("Você errou o último tiro. =(");
+                }
 
             }while(isTheShotRight && players.getPlayersShotsOnTarget() < players.getShotsToBeHit());
             do{
