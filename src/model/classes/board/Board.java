@@ -1,5 +1,6 @@
 package model.classes.board;
 
+import model.classes.utils.ColumnLettersGenerator;
 import model.classes.utils.Input;
 import model.classes.utils.RandomNumberGenerator;
 
@@ -35,8 +36,9 @@ public class Board {
         for(int line = 0; line < this.NUMBER_OF_LINES; line++){
             for(int column = 0; column < this.NUMBER_OF_COLUMNS; column++){
                 if (column == 0) {
-                    this.playerBoard[line][column] = String.valueOf(line);
-                    this.computerBoard[line][column] = String.valueOf(line);
+                    char showLineLetter = ColumnLettersGenerator.transformNumberInLetter(line);
+                    this.playerBoard[line][column] = String.valueOf(showLineLetter);
+                    this.computerBoard[line][column] = String.valueOf(showLineLetter);
                 } else if (line == 0){
                     this.playerBoard[line][column] = String.valueOf(column);
                     this.computerBoard[line][column] = String.valueOf(column);
@@ -48,14 +50,6 @@ public class Board {
         }
     }
     public void showBoard(){
-        System.out.println("Tabuleiro do computador");
-        for(int line = 0; line < computerBoard.length; line++){
-            for(int column = 0; column < computerBoard[line].length; column++){
-                System.out.print("|" + computerBoard[line][column]);
-            }
-            System.out.println("|");
-
-        }
         System.out.println("Seu tabuleiro");
         for(int line = 0; line < playerBoard.length; line++){
             for(int column = 0; column < playerBoard[line].length; column++){
@@ -65,6 +59,20 @@ public class Board {
 
         }
 
+        System.out.println("Tabuleiro do computador");
+        for(int line = 0; line < computerBoard.length; line++){
+            for(int column = 0; column < computerBoard[line].length; column++){
+                String showItem;
+                if(computerBoard[line][column] == "S") {
+                    showItem = ".";
+                } else {
+                    showItem = computerBoard[line][column];
+                }
+                System.out.print("|" + showItem);
+            }
+            System.out.println("|");
+
+        }
     }
 
     public ArrayList<int[]> setOptionsForShipFinalPosition(int initialLine, int initialColumn, int shipLength){
@@ -85,7 +93,7 @@ public class Board {
 
     public void printOptionsOnConsole(ArrayList<int[]> options){
         for(int i = 0; i < options.size(); i++){
-            System.out.println("Opção " + (i + 1) +": [" + Integer.toString(options.get(i)[this.ARRAY_POSITION_FOR_LINE]) + "," + Integer.toString(options.get(i)[this.ARRAY_POSITION_FOR_COLUMN]) + "]");
+            System.out.println("Opção " + (i + 1) +": [" + ColumnLettersGenerator.transformNumberInLetter(options.get(i)[this.ARRAY_POSITION_FOR_LINE]) + "," + Integer.toString(options.get(i)[this.ARRAY_POSITION_FOR_COLUMN]) + "]");
             }
         }
 

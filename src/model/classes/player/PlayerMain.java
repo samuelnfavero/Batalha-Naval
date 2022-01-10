@@ -1,5 +1,6 @@
 package model.classes.player;
 
+import model.classes.utils.ColumnLettersGenerator;
 import model.classes.utils.Input;
 import model.classes.utils.RandomNumberGenerator;
 
@@ -43,11 +44,11 @@ public class PlayerMain {
         boolean isTheShotRight = true;
         if(typeOfPlayer == "Player") {
             do {
-                System.out.println("Digite a linha da posição para dar o tiro: ");
-                line = Input.inputInt();
+                System.out.println("Digite a linha da posição para dar o tiro (LETRA): ");
+                line = ColumnLettersGenerator.transformLetterInNumber(Input.inputChar());
             }while(line < BOARD_FIRST_POSITION || line > BOARD_LAST_POSITION);
             do{
-                System.out.println("Digite a coluna da posição para dar o tiro: ");
+                System.out.println("Digite a coluna da posição para dar o tiro (NÚMERO): ");
                 column = Input.inputInt();
             }while(column < BOARD_FIRST_POSITION  || column > BOARD_LAST_POSITION);
             isTheShotRight = setShotOnTheBoard(board, line, column);
@@ -71,6 +72,9 @@ public class PlayerMain {
         }
         if(boardElement == "."){
             board[line][column] = "-";
+            isTheShotRight = false;
+        }
+        if(boardElement == "X"){
             isTheShotRight = false;
         }
         return  isTheShotRight;
