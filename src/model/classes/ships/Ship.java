@@ -65,7 +65,7 @@ public class Ship {
         while(initialLine < 1 || initialLine > 10) {
             System.out.println("Essa posição não existe no tabuleiro");
             System.out.println("Insira a linha da posição inicial deste navio: ");
-            initialLine = Input.inputInt();
+            initialLine = ColumnLettersGenerator.transformLetterInNumber(Input.inputChar());
         }
         this.setInitialLine(initialLine);
     }

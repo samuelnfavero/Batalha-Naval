@@ -1,7 +1,7 @@
 package model;
 
 import model.classes.board.Board;
-import model.classes.player.PlayerMain;
+import model.classes.player.Player;
 import model.classes.ships.Ship;
 import model.classes.utils.RandomNumberGenerator;
 
@@ -58,7 +58,7 @@ public class Battleship {
             board.showBoard();
         }
 
-        PlayerMain players = new PlayerMain();
+        Player players = new Player();
 
         System.out.println("Começando os ataques ...");
 

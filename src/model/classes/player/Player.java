@@ -4,16 +4,14 @@ import model.classes.utils.ColumnLettersGenerator;
 import model.classes.utils.Input;
 import model.classes.utils.RandomNumberGenerator;
 
-import java.util.Arrays;
-
 import static java.util.Arrays.stream;
 
-public class PlayerMain {
+public class Player {
     private int playersShotsOnTarget;
     private int computersShotsOnTarget;
     private int shotsToBeHit;
 
-    public PlayerMain(){
+    public Player(){
         this.playersShotsOnTarget = 0;
         this.computersShotsOnTarget = 0;
         this.shotsToBeHit = 16;
