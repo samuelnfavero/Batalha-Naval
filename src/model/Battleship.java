@@ -13,14 +13,15 @@ public class Battleship {
         final int ARRAY_POSITION_FOR_LINE = 0;
         final int ARRAY_POSITION_FOR_COLUMN = 1;
 
-
-        Board board = new Board(11, 11);
-        board.boardGenerator();
-        board.showBoard();
         Ship[] playerShips =new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
                 new Ship("Navio 5", 3), new Ship("Navio 6", 3), new Ship("Navio 7", 4)};
         Ship[] computerShips =new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
                 new Ship("Navio 5", 3), new Ship("Navio 6", 3), new Ship("Navio 7", 4)};
+        Board board = new Board(11, 11);
+
+        board.boardGenerator();
+        board.showBoard();
+
         for(int i = 0; i < computerShips.length; i++) {
             boolean isEmpty;
             do {

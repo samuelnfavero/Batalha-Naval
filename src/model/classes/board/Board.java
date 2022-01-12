@@ -32,7 +32,7 @@ public class Board {
     }
 
 
-    public void boardGenerator(){ //aqui não rola com função statica não sei pq, tem q ver dps
+    public void boardGenerator(){
         for(int line = 0; line < this.NUMBER_OF_LINES; line++){
             for(int column = 0; column < this.NUMBER_OF_COLUMNS; column++){
                 if (column == 0) {
@@ -76,9 +76,10 @@ public class Board {
     }
 
     public ArrayList<int[]> setOptionsForShipFinalPosition(int initialLine, int initialColumn, int shipLength){
-        int[] option1 = (initialLine - (shipLength - 1)) >= 0 ? new int[] {(initialLine - (shipLength - 1)), initialColumn} : new int[]{0};
+
+        int[] option1 = (initialLine - (shipLength - 1)) >= 1 ? new int[] {(initialLine - (shipLength - 1)), initialColumn} : new int[]{0};
         int[] option2 = (initialLine + (shipLength-1)) < this.playerBoard.length ? new int[] {(initialLine + (shipLength-1)), initialColumn} : new int[] {0};
-        int[] option3 = (initialColumn - (shipLength - 1)) >= 0? new int[] {initialLine, (initialColumn - (shipLength - 1))} : new int[] {0};
+        int[] option3 = (initialColumn - (shipLength - 1)) >= 1? new int[] {initialLine, (initialColumn - (shipLength - 1))} : new int[] {0};
         int[] option4 = (initialColumn + (shipLength - 1)) < this.playerBoard.length ? new int[] {initialLine, (initialColumn + (shipLength - 1))} : new int[] {0};
         int[][] optionsArray = {option1, option2, option3, option4};
         ArrayList<int[]> options = new ArrayList<int[]>();
@@ -99,7 +100,7 @@ public class Board {
 
 
     public static int[] chooseOptionForPlayer(ArrayList<int[]> options){
-        System.out.println("Digite a opção escolhida:" + options.size());
+        System.out.println("Digite a opção escolhida:");
         int option = (Input.inputInt() - 1);
         while(option >= options.size()){
             System.out.println("Opção Inválida. Digite a opção escolhida:");
