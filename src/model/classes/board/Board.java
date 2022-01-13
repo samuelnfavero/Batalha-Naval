@@ -6,6 +6,8 @@ import model.classes.utils.Input;
 import model.classes.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Board {
@@ -102,11 +104,16 @@ public class Board {
 
     public static int[] chooseOptionForPlayer(ArrayList<int[]> options){
         System.out.println("Digite a opção escolhida:");
-        int option = (Input.inputInt() - 1);
-        while(option >= options.size()){
-            System.out.println("Opção Inválida. Digite a opção escolhida:");
-            option = (Input.inputInt() - 1);
-        }
+        int option = -1;
+        do {
+            try {
+                option = (Input.inputInt() - 1);
+            } catch (InputMismatchException e) {
+                System.out.println("Não é um número inteiro.");
+            }
+            if(option >= options.size() || option < 0){System.out.println("Opção Inválida. Digite a opção escolhida:");}
+        } while(option >= options.size() || option < 0);
+        
         return options.get(option);
     }
 

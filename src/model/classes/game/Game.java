@@ -130,10 +130,8 @@ public class Game {
         }
 
         private static boolean verifyIfThePositionIsEmpty(int[][] shipAllPositions, String[][] boardMatrix, String typeOfPlayer){
-            final int ARRAY_POSITION_FOR_LINE = 0;
-            final int ARRAY_POSITION_FOR_COLUMN = 1;
             for (int[] position : shipAllPositions) {
-                if (boardMatrix[position[ARRAY_POSITION_FOR_LINE]][position[ARRAY_POSITION_FOR_COLUMN]] != BoardSymbols.SEA.getBoardSymbol()) {
+                if (boardMatrix[position[Positions.LINE.getValue()]][position[Positions.COLUMN.getValue()]] != BoardSymbols.SEA.getBoardSymbol()) {
                     if(typeOfPlayer == "Player"){System.out.println("Uma das posições já está ocupada. Insira as posições deste navio novamente.");}
                     return false;
                 }

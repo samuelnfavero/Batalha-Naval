@@ -70,10 +70,10 @@ public class Player {
             isTheShotRight = true;
         }
         if(boardElement == BoardSymbols.SEA.getBoardSymbol()){
-            board[line][column] = BoardSymbols.SEA.getBoardSymbol();
+            board[line][column] = BoardSymbols.WRONG_SHOTS.getBoardSymbol();
             isTheShotRight = false;
         }
-        if(boardElement == BoardSymbols.SHIP.getBoardSymbol() || boardElement == BoardSymbols.SEA.getBoardSymbol()){
+        if(boardElement == BoardSymbols.RIGHT_SHOTS.getBoardSymbol() || boardElement == BoardSymbols.WRONG_SHOTS.getBoardSymbol()){
             isTheShotRight = false;
         }
         return  isTheShotRight;
