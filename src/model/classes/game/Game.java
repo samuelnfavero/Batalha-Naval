@@ -30,31 +30,9 @@ public class Game {
 
             Player players = new Player();
 
-            System.out.println("Começando os ataques ...");
+            startTheShots(board, players);
 
-            boolean isTheShotRight;
-            while((players.getPlayersShotsOnTarget() < players.getShotsToBeHit()) && (players.getComputersShotsOnTarget() < players.getShotsToBeHit())) {
-                do{
-                    isTheShotRight = players.giveAShot(board.getComputerBoard(), "Player");
-                    System.out.println("Player" + players.getPlayersShotsOnTarget());
-                    board.showBoard();
-                    if(isTheShotRight) {
-                        System.out.println("Você acertou o último tiro!!! =D");
-                    } else {
-                        System.out.println("Você errou o último tiro. =(");
-                    }
-
-                }while(isTheShotRight && players.getPlayersShotsOnTarget() < players.getShotsToBeHit());
-                do{
-                    isTheShotRight = players.giveAShot(board.getPlayerBoard(), "Computer");
-                    System.out.println("Computador" + players.getComputersShotsOnTarget());
-                    board.showBoard();
-                }while(isTheShotRight && (players.getComputersShotsOnTarget() < players.getShotsToBeHit()));
-            }
-
-            System.out.println("Jogo encerrado!");
-            String winner = players.getPlayersShotsOnTarget() == players.getShotsToBeHit() ? "Você venceu!": "Você perdeu!";
-            System.out.println(winner);
+            finishGame(players);
         }
 
         private static void placeComputersShips(Board board, Ship[] computersShips){
@@ -96,6 +74,53 @@ public class Game {
                 board.putShipOnTheBoard(ship.getShipAllPositions(), board.getPlayerBoard());
                 board.showBoard();
             }
+        }
+
+        private static void startTheShots(Board board, Player players){
+            System.out.println("\nComeçando os ataques ...\n");
+            while((players.getPlayersShotsOnTarget() < players.getShotsToBeHit()) && (players.getComputersShotsOnTarget() < players.getShotsToBeHit())) {
+                playersShot(board, players);
+                computersShot(board, players);
+            }
+        }
+
+        private static void playersShot(Board board, Player players){
+            boolean isTheShotRight;
+            String typeOfPlayer = "Player";
+            System.out.println("\nSua vez de jogar\n");
+            do {
+                    isTheShotRight = players.giveAShot(board.getComputerBoard(), typeOfPlayer);
+                    System.out.println("Player" + players.getPlayersShotsOnTarget());
+                    board.showBoard();
+                    shotMessage(isTheShotRight, typeOfPlayer);
+                }while(isTheShotRight && players.getPlayersShotsOnTarget() < players.getShotsToBeHit());
+        }
+
+        private static void computersShot(Board board, Player players){
+            boolean isTheShotRight;
+            String typeOfPlayer = "Computer";
+            System.out.println("\nVez do computador...\n");
+            
+            do{
+                isTheShotRight = players.giveAShot(board.getPlayerBoard(), "Computer");
+                System.out.println("Computador" + players.getComputersShotsOnTarget());
+                board.showBoard();
+                shotMessage(isTheShotRight, typeOfPlayer);
+            }while(isTheShotRight && (players.getComputersShotsOnTarget() < players.getShotsToBeHit()));
+        }
+
+        private static void shotMessage(boolean isTheShotRight, String typeOfPlayer){
+            if (isTheShotRight) {
+                System.out.println("Tiro no alvo do " + typeOfPlayer + "!!! =D");
+            } else {
+                System.out.println("Tiro no mar do " + typeOfPlayer + ". =(");
+            }
+        }
+
+        private static void finishGame(Player players){
+            System.out.println("Jogo encerrado!");
+            String winner = players.getPlayersShotsOnTarget() == players.getShotsToBeHit() ? "Você venceu!": "Você perdeu!";
+            System.out.println(winner);
         }
 
         private static boolean verifyIfThePositionIsEmpty(int[][] shipAllPositions, String[][] boardMatrix, String typeOfPlayer){
