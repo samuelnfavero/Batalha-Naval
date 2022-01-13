@@ -1,4 +1,4 @@
-package model.classes.board;
+package model.classes.entities;
 
 import model.classes.enums.BoardSymbols;
 import model.classes.utils.ColumnLettersGenerator;

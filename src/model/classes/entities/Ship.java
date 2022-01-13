@@ -1,4 +1,4 @@
-package model.classes.ships;
+package model.classes.entities;
 
 import model.classes.enums.BoardSymbols;
 import model.classes.enums.Positions;

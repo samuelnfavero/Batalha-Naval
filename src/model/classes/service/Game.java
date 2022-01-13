@@ -1,10 +1,10 @@
-package model.classes.game;
+package model.classes.service;
 
-import model.classes.board.Board;
+import model.classes.entities.Board;
 import model.classes.enums.BoardSymbols;
 import model.classes.enums.Positions;
-import model.classes.player.Player;
-import model.classes.ships.Ship;
+import model.classes.entities.Player;
+import model.classes.entities.Ship;
 import model.classes.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
@@ -50,9 +50,7 @@ public class Game {
                     ship.setArrayWithShipAllPositions();
                     isEmpty = verifyIfThePositionIsEmpty(ship.getShipAllPositions(), board.getComputerBoard(), "Computer");
                 }while (isEmpty == false);
-                System.out.println("fdjhsdkfjdf");
                 board.putShipOnTheBoard(ship.getShipAllPositions(), board.getComputerBoard());
-                board.showBoard();
             }
 
         }
