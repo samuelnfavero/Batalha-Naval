@@ -1,5 +1,6 @@
 package model.classes.player;
 
+import model.classes.enums.BoardSymbols;
 import model.classes.utils.ColumnLettersGenerator;
 import model.classes.utils.Input;
 import model.classes.utils.RandomNumberGenerator;
@@ -64,15 +65,15 @@ public class Player {
     private static boolean setShotOnTheBoard(String[][] board, int line, int column){
         String boardElement = board[line][column];
         boolean isTheShotRight = true;
-        if(boardElement == "S"){
-            board[line][column] = "X";
+        if(boardElement == BoardSymbols.SHIP.getBoardSymbol()){
+            board[line][column] = BoardSymbols.RIGHT_SHOTS.getBoardSymbol();
             isTheShotRight = true;
         }
-        if(boardElement == "."){
-            board[line][column] = "-";
+        if(boardElement == BoardSymbols.SEA.getBoardSymbol()){
+            board[line][column] = BoardSymbols.SEA.getBoardSymbol();
             isTheShotRight = false;
         }
-        if(boardElement == "X" || boardElement == "-"){
+        if(boardElement == BoardSymbols.SHIP.getBoardSymbol() || boardElement == BoardSymbols.SEA.getBoardSymbol()){
             isTheShotRight = false;
         }
         return  isTheShotRight;

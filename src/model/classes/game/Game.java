@@ -1,6 +1,7 @@
 package model.classes.game;
 
 import model.classes.board.Board;
+import model.classes.enums.BoardSymbols;
 import model.classes.enums.Positions;
 import model.classes.player.Player;
 import model.classes.ships.Ship;
@@ -10,8 +11,7 @@ import java.util.ArrayList;
 
 public class Game {
         public static void PlayGame(){
-            final int ARRAY_POSITION_FOR_LINE = 0;
-            final int ARRAY_POSITION_FOR_COLUMN = 1;
+
 
             Ship[] playersShips = new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
                     new Ship("Navio 5", 3), new Ship("Navio 6", 3), new Ship("Navio 7", 4)};
@@ -50,7 +50,9 @@ public class Game {
                     ship.setArrayWithShipAllPositions();
                     isEmpty = verifyIfThePositionIsEmpty(ship.getShipAllPositions(), board.getComputerBoard(), "Computer");
                 }while (isEmpty == false);
+                System.out.println("fdjhsdkfjdf");
                 board.putShipOnTheBoard(ship.getShipAllPositions(), board.getComputerBoard());
+                board.showBoard();
             }
 
         }
@@ -131,7 +133,7 @@ public class Game {
             final int ARRAY_POSITION_FOR_LINE = 0;
             final int ARRAY_POSITION_FOR_COLUMN = 1;
             for (int[] position : shipAllPositions) {
-                if (boardMatrix[position[ARRAY_POSITION_FOR_LINE]][position[ARRAY_POSITION_FOR_COLUMN]] != ".") {
+                if (boardMatrix[position[ARRAY_POSITION_FOR_LINE]][position[ARRAY_POSITION_FOR_COLUMN]] != BoardSymbols.SEA.getBoardSymbol()) {
                     if(typeOfPlayer == "Player"){System.out.println("Uma das posições já está ocupada. Insira as posições deste navio novamente.");}
                     return false;
                 }

@@ -1,5 +1,6 @@
 package model.classes.board;
 
+import model.classes.enums.BoardSymbols;
 import model.classes.utils.ColumnLettersGenerator;
 import model.classes.utils.Input;
 import model.classes.utils.RandomNumberGenerator;
@@ -43,8 +44,8 @@ public class Board {
                     this.playerBoard[line][column] = String.valueOf(column);
                     this.computerBoard[line][column] = String.valueOf(column);
                 } else {
-                    this.playerBoard[line][column] = ".";
-                    this.computerBoard[line][column] = ".";
+                    this.playerBoard[line][column] = BoardSymbols.SEA.getBoardSymbol();
+                    this.computerBoard[line][column] = BoardSymbols.SEA.getBoardSymbol();
                 }
             }
         }
@@ -63,8 +64,8 @@ public class Board {
         for(int line = 0; line < computerBoard.length; line++){
             for(int column = 0; column < computerBoard[line].length; column++){
                 String showItem;
-                if(computerBoard[line][column] == "S") {
-                    showItem = ".";
+                if(computerBoard[line][column] == BoardSymbols.SHIP.getBoardSymbol()) {
+                    showItem = BoardSymbols.SEA.getBoardSymbol();
                 } else {
                     showItem = computerBoard[line][column];
                 }
@@ -119,7 +120,7 @@ public class Board {
 
     public static void putShipOnTheBoard(int[][] allPositionsOfShip, String[][] boardMatrix){
         for(int i = 0; i < allPositionsOfShip.length; i++){
-            boardMatrix[allPositionsOfShip[i][0]][allPositionsOfShip[i][1]] = "S";
+            boardMatrix[allPositionsOfShip[i][0]][allPositionsOfShip[i][1]] = BoardSymbols.SHIP.getBoardSymbol();
         }
     }
 

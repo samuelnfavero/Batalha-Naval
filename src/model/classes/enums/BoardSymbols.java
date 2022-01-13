@@ -1,14 +1,18 @@
 package model.classes.enums;
 
 public enum BoardSymbols {
-    SHIP ('S'),
-    SEA ('~'),
-    RIGHT_SHOTS ('X'),
-    WRONG_SHOTS ('O');
+    SHIP ("S"),
+    SEA ("~"),
+    RIGHT_SHOTS ("X"),
+    WRONG_SHOTS ("O");
 
-    private final char boardSymbol;
+    private final String boardSymbol;
 
-    BoardSymbols(char boardSymbol){
+    BoardSymbols(String boardSymbol){
         this.boardSymbol = boardSymbol;
+    }
+
+    public String getBoardSymbol() {
+        return boardSymbol;
     }
 }
