@@ -79,8 +79,12 @@ public class Game {
         private static void startTheShots(Board board, Player players){
             System.out.println("\nComeçando os ataques ...\n");
             while((players.getPlayersShotsOnTarget() < players.getShotsToBeHit()) && (players.getComputersShotsOnTarget() < players.getShotsToBeHit())) {
+
                 playersShot(board, players);
+
+                if(players.getPlayersShotsOnTarget() < players.getShotsToBeHit()){
                 computersShot(board, players);
+                }
             }
         }
 
@@ -100,7 +104,7 @@ public class Game {
             boolean isTheShotRight;
             String typeOfPlayer = "Computer";
             System.out.println("\nVez do computador...\n");
-            
+
             do{
                 isTheShotRight = players.giveAShot(board.getPlayerBoard(), "Computer");
                 System.out.println("Computador" + players.getComputersShotsOnTarget());
