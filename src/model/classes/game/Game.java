@@ -1,6 +1,7 @@
 package model.classes.game;
 
 import model.classes.board.Board;
+import model.classes.enums.Positions;
 import model.classes.player.Player;
 import model.classes.ships.Ship;
 import model.classes.utils.RandomNumberGenerator;
@@ -12,10 +13,10 @@ public class Game {
             final int ARRAY_POSITION_FOR_LINE = 0;
             final int ARRAY_POSITION_FOR_COLUMN = 1;
 
-            Ship[] playerShips =new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
+            Ship[] playersShips = new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
                     new Ship("Navio 5", 3), new Ship("Navio 6", 3), new Ship("Navio 7", 4)};
 
-            Ship[] computerShips =new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
+            Ship[] computersShips = new Ship[]{new Ship("Navio 1", 1), new Ship("Navio 2", 1), new Ship("Navio 3", 2), new Ship("Navio 4", 2),
                     new Ship("Navio 5", 3), new Ship("Navio 6", 3), new Ship("Navio 7", 4)};
 
             Board board = new Board(11, 11);
@@ -23,42 +24,9 @@ public class Game {
             board.boardGenerator();
             board.showBoard();
 
-            for(int i = 0; i < computerShips.length; i++) {
-                boolean isEmpty;
-                do {
-                    computerShips[i].setInitialLine(RandomNumberGenerator.randomIntGenerator(10));
-                    computerShips[i].setInitialColumn(RandomNumberGenerator.randomIntGenerator(10));
-                    if (computerShips[i].getShipLength() > 1) {
-                        ArrayList options = board.setOptionsForShipFinalPosition(computerShips[i].getInitialLine(), computerShips[i].getInitialColumn(), computerShips[i].getShipLength());
-                        int[] option = board.chooseOptionForComputer(options);
-                        computerShips[i].setFinalLine(option[ARRAY_POSITION_FOR_LINE]);
-                        computerShips[i].setFinalColumn(option[ARRAY_POSITION_FOR_COLUMN]);
-                    }
-                    computerShips[i].setArrayWithShipAllPositions();
-                    isEmpty = verifyIfThePositionIsEmpty(computerShips[i].getShipAllPositions(), board.getComputerBoard(), "Computer");
-                }while (isEmpty == false);
-                board.putShipOnTheBoard(computerShips[i].getShipAllPositions(), board.getComputerBoard());
-            }
+            placeComputersShips(board, computersShips);
 
-            for(int i = 0; i < playerShips.length; i++) {
-                boolean isEmpty;
-                do {
-                    playerShips[i].changeInitialLine();
-                    playerShips[i].changeInitialColumn();
-                    if (playerShips[i].getShipLength() > 1) {
-                        ArrayList options = board.setOptionsForShipFinalPosition(playerShips[i].getInitialLine(), playerShips[i].getInitialColumn(), playerShips[i].getShipLength());
-                        board.printOptionsOnConsole(options);
-                        int[] option = board.chooseOptionForPlayer(options);
-                        playerShips[i].setFinalLine(option[ARRAY_POSITION_FOR_LINE]);
-                        playerShips[i].setFinalColumn(option[ARRAY_POSITION_FOR_COLUMN]);
-                    }
-
-                    playerShips[i].setArrayWithShipAllPositions();
-                    isEmpty = verifyIfThePositionIsEmpty(playerShips[i].getShipAllPositions(), board.getPlayerBoard(), "Player");
-                }while (isEmpty == false);
-                board.putShipOnTheBoard(playerShips[i].getShipAllPositions(), board.getPlayerBoard());
-                board.showBoard();
-            }
+            placePlayersShips(board, playersShips);
 
             Player players = new Player();
 
@@ -89,8 +57,48 @@ public class Game {
             System.out.println(winner);
         }
 
+        private static void placeComputersShips(Board board, Ship[] computersShips){
+            for(Ship ship : computersShips) {
+                boolean isEmpty;
+                do {
+                    ship.setInitialLine(RandomNumberGenerator.randomIntGenerator(10));
+                    ship.setInitialColumn(RandomNumberGenerator.randomIntGenerator(10));
+                    if (ship.getShipLength() > 1) {
+                        ArrayList options = board.setOptionsForShipFinalPosition(ship.getInitialLine(), ship.getInitialColumn(), ship.getShipLength());
+                        int[] option = board.chooseOptionForComputer(options);
+                        ship.setFinalLine(option[Positions.LINE.getValue()]);
+                        ship.setFinalColumn(option[Positions.COLUMN.getValue()]);
+                    }
+                    ship.setArrayWithShipAllPositions();
+                    isEmpty = verifyIfThePositionIsEmpty(ship.getShipAllPositions(), board.getComputerBoard(), "Computer");
+                }while (isEmpty == false);
+                board.putShipOnTheBoard(ship.getShipAllPositions(), board.getComputerBoard());
+            }
 
-        public static boolean verifyIfThePositionIsEmpty(int[][] shipAllPositions, String[][] boardMatrix, String typeOfPlayer){
+        }
+        private static void placePlayersShips(Board board, Ship[] playersShips){
+            for(Ship ship : playersShips) {
+                boolean isEmpty;
+                do {
+                    ship.changeInitialLine();
+                    ship.changeInitialColumn();
+                    if (ship.getShipLength() > 1) {
+                        ArrayList options = board.setOptionsForShipFinalPosition(ship.getInitialLine(), ship.getInitialColumn(), ship.getShipLength());
+                        board.printOptionsOnConsole(options);
+                        int[] option = board.chooseOptionForPlayer(options);
+                        ship.setFinalLine(option[Positions.LINE.getValue()]);
+                        ship.setFinalColumn(option[Positions.COLUMN.getValue()]);
+                    }
+
+                    ship.setArrayWithShipAllPositions();
+                    isEmpty = verifyIfThePositionIsEmpty(ship.getShipAllPositions(), board.getPlayerBoard(), "Player");
+                }while (isEmpty == false);
+                board.putShipOnTheBoard(ship.getShipAllPositions(), board.getPlayerBoard());
+                board.showBoard();
+            }
+        }
+
+        private static boolean verifyIfThePositionIsEmpty(int[][] shipAllPositions, String[][] boardMatrix, String typeOfPlayer){
             final int ARRAY_POSITION_FOR_LINE = 0;
             final int ARRAY_POSITION_FOR_COLUMN = 1;
             for (int[] position : shipAllPositions) {
